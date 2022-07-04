@@ -56,6 +56,22 @@
   gap: 25px;
 }
 
+.checkbox-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.checkbox-container input {
+  position: absolute;
+  cursor: pointer;
+  left: 1px;
+  top: 2px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin: 0;
+}
+
 .fa-solid.fa-heart {
   color: rgb(206, 17, 17);
 }

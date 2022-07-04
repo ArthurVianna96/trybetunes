@@ -71,15 +71,15 @@ class Album extends Component {
           <div className="track-name-favorite">
             <p>{track.trackName}</p>
             <div className="checkbox-container">
+              {isSongFavorite
+                ? <i className="fa-solid fa-heart" />
+                : <i className="fa-regular fa-heart" />}
               <input
                 type="checkbox"
                 checked={ isSongFavorite }
                 data-testid={ `checkbox-music-${track.trackId}` }
                 onChange={ () => this.handleFavoriteTrack(track) }
               />
-              {isSongFavorite
-                ? <i className="fa-solid fa-heart" />
-                : <i className="fa-regular fa-heart" />}
             </div>
           </div>
           <audio
