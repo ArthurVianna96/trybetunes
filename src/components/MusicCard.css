@@ -1,0 +1,34 @@
+.track {
+  align-items: center;
+  border-bottom: 1px solid #e1e5eb;
+  border-top: 1px solid #e1e5eb;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.track-name-favorite {
+  align-items: center;
+  display: flex;
+  gap: 25px;
+}
+
+.checkbox-container {
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox-container label {
+  color: transparent;
+}
+
+.checkbox-container input {
+  cursor: pointer;
+  left: 1px;
+  position: absolute;
+  top: 2px;
+}
+
+.fa-solid.fa-heart {
+  color: rgb(206, 17, 17);
+}
