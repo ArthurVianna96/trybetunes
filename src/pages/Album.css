@@ -1,7 +1,16 @@
+:root {
+
+  --bk: rgba(2, 0, 36, 1);
+
+  --gn: rgba(3, 107, 82, 1);
+
+  --cy: rgba(0, 212, 255, 1);
+}
+
 .album-page {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .album-description {
@@ -14,8 +23,8 @@
 
 .album-name {
   align-items: flex-end;
-  background: rgb(2,0,36);
-  background: linear-gradient(51deg, rgba(2,0,36,1) 0%, rgba(3,107,82,1) 35%, rgba(0,212,255,1) 100%);
+  background: rgb(2, 0, 36);
+  background-image: linear-gradient(51deg, var(--bk) 0%, var(--gn) 35%, var(--cy) 100%);
   color: white;
   display: flex;
   gap: 20px;
@@ -32,8 +41,8 @@
 }
 
 .album-name img {
-  width: 150px;
   background-color: black;
+  width: 150px;
 }
 
 .album-tracks {
@@ -43,8 +52,8 @@
 
 .track {
   align-items: center;
-  border-top: 1px solid #e1e5eb;
   border-bottom: 1px solid #e1e5eb;
+  border-top: 1px solid #e1e5eb;
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
@@ -57,19 +66,15 @@
 }
 
 .checkbox-container {
-  position: relative;
   cursor: pointer;
+  position: relative;
 }
 
 .checkbox-container input {
-  position: absolute;
   cursor: pointer;
   left: 1px;
+  position: absolute;
   top: 2px;
-}
-
-.checkbox-container input[type="checkbox"] {
-  margin: 0;
 }
 
 .fa-solid.fa-heart {
