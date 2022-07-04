@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Login from './pages/Login';
 import Search from './pages/Search';
@@ -8,22 +8,38 @@ import Favorites from './pages/Favorites';
 import ProfileEdit from './pages/ProfileEdit';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
+import { getUser } from './services/userAPI';
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false,
+    };
+
+    this.handleLogIn = this.handleLogIn.bind(this);
+  }
+
+  async handleLogIn() {
+    const user = await getUser();
+    const isUserSet = Object.keys(user).length > 0;
+    if (isUserSet) this.setState({ loggedIn: true });
+  }
+
   render() {
+    const { loggedIn } = this.state;
     return (
-      <>
-        <p>TrybeTunes</p>
-        <Switch>
-          <Route path="/" exact component={ Login } />
-          <Route path="/search" component={ Search } />
-          <Route path="/album/:id" component={ Album } />
-          <Route path="/favorites" component={ Favorites } />
-          <Route path="/profile/edit" component={ ProfileEdit } />
-          <Route path="/profile" component={ Profile } />
-          <Route path="/*" component={ NotFound } />
-        </Switch>
-      </>
+      <Switch>
+        <Route path="/" exact>
+          {loggedIn ? <Redirect to="/search" /> : <Login callback={ this.handleLogIn } />}
+        </Route>
+        <Route path="/search" component={ Search } />
+        <Route path="/album/:id" component={ Album } />
+        <Route path="/favorites" component={ Favorites } />
+        <Route path="/profile/edit" component={ ProfileEdit } />
+        <Route path="/profile" component={ Profile } />
+        <Route path="/*" component={ NotFound } />
+      </Switch>
     );
   }
 }
