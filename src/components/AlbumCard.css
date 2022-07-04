@@ -1,0 +1,33 @@
+.album-card {
+  border-radius: 5px;
+  box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.25);
+  color: black;
+  flex-basis: 24%;
+  height: 240px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: all 300ms ease;
+}
+
+.album-card:hover {
+  opacity: 0.8;
+}
+
+.album-card img {
+  background-color: black;
+  height: 140px;
+  object-fit: scale-down;
+  width: 100%;
+}
+
+.album-info {
+  padding: 10px;
+}
+
+.album-info h3 {
+  font-size: 15px;
+}
+
+.album-info p {
+  font-size: 13px;
+}
