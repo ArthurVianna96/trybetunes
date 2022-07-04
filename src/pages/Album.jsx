@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 import './Album.css';
 import getMusics from '../services/musicsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 
@@ -13,14 +14,38 @@ class Album extends Component {
       isLoading: true,
       tracks: [],
       album: {},
+      favoriteSongs: [],
     };
+    this.handleFavoriteTrack = this.handleFavoriteTrack.bind(this);
+    this.checkIfSongIsFavorite = this.checkIfSongIsFavorite.bind(this);
   }
 
   async componentDidMount() {
     const { match } = this.props;
     const { params: { id } } = match;
     const { tracks, album } = await this.getAlbumData(id);
-    this.setState({ isLoading: false, tracks, album });
+    const favoriteSongs = await this.getListOfFavoriteSongs();
+    this.setState({ isLoading: false, tracks, album, favoriteSongs });
+  }
+
+  async handleFavoriteTrack(track) {
+    const isSongAlreadyInFavorites = this.checkIfSongIsFavorite(track);
+    this.setState({ isLoading: true });
+    if (!isSongAlreadyInFavorites) {
+      await addSong(track);
+      const newFavoriteSongs = await this.getListOfFavoriteSongs();
+      this.setState({ favoriteSongs: newFavoriteSongs });
+    } else {
+      await removeSong(track);
+      const newFavoriteSongs = await this.getListOfFavoriteSongs();
+      this.setState({ favoriteSongs: newFavoriteSongs });
+    }
+    this.setState({ isLoading: false });
+  }
+
+  async getListOfFavoriteSongs() {
+    const favoriteSongs = await getFavoriteSongs();
+    return favoriteSongs;
   }
 
   async getAlbumData(id) {
@@ -30,40 +55,66 @@ class Album extends Component {
     };
   }
 
+  checkIfSongIsFavorite(track) {
+    const { favoriteSongs } = this.state;
+    const isSongAlreadyFavorite = favoriteSongs.some((song) => (
+      song.trackId === track.trackId));
+    return isSongAlreadyFavorite;
+  }
+
+  renderSongs() {
+    const { tracks } = this.state;
+    return tracks.map((track) => {
+      const isSongFavorite = this.checkIfSongIsFavorite(track);
+      return (
+        <div key={ track.trackId } className="track">
+          <div className="track-name-favorite">
+            <p>{track.trackName}</p>
+            <div className="checkbox-container">
+              <input
+                type="checkbox"
+                checked={ isSongFavorite }
+                data-testid={ `checkbox-music-${track.trackId}` }
+                onChange={ () => this.handleFavoriteTrack(track) }
+              />
+              {isSongFavorite
+                ? <i className="fa-solid fa-heart" />
+                : <i className="fa-regular fa-heart" />}
+            </div>
+          </div>
+          <audio
+            data-testid="audio-component"
+            src={ track.previewUrl }
+            controls
+          >
+            <track kind="captions" />
+          </audio>
+        </div>
+      );
+    });
+  }
+
   render() {
-    const { isLoading, tracks, album } = this.state;
+    const { isLoading, album } = this.state;
     const { artworkUrl100, collectionName, artistName } = album;
     return (
-      <div data-testid="page-album">
+      <div className="album-page" data-testid="page-album">
+        <Header />
         {isLoading
           ? <Loading />
           : (
-            <>
-              <Header />
-              <div className="album-description">
-                <div className="album-name">
-                  <img src={ artworkUrl100 } alt={ collectionName } />
-                  <div className="album-name-text">
-                    <h3 data-testid="album-name">{collectionName}</h3>
-                    <p data-testid="artist-name">{artistName}</p>
-                  </div>
-                </div>
-                <div className="album-tracks">
-                  {tracks.map((track) => (
-                    <div key={ track.trackNumber } className="track">
-                      <p>{track.trackName}</p>
-                      <audio
-                        data-testid="audio-component"
-                        src={ track.previewUrl }
-                        controls
-                      >
-                        <track kind="captions" />
-                      </audio>
-                    </div>
-                  ))}
+            <div className="album-description">
+              <div className="album-name">
+                <img src={ artworkUrl100 } alt={ collectionName } />
+                <div className="album-name-text">
+                  <h3 data-testid="album-name">{collectionName}</h3>
+                  <p data-testid="artist-name">{artistName}</p>
                 </div>
               </div>
-            </>
+              <div className="album-tracks">
+                {this.renderSongs()}
+              </div>
+            </div>
           )}
       </div>);
   }

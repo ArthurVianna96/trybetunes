@@ -1,3 +1,9 @@
+.album-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .album-description {
   align-items: flex-start;
   display: flex;
@@ -7,14 +13,14 @@
 }
 
 .album-name {
+  align-items: flex-end;
   background: rgb(2,0,36);
   background: linear-gradient(51deg, rgba(2,0,36,1) 0%, rgba(3,107,82,1) 35%, rgba(0,212,255,1) 100%);
-  padding: 50px;
-  width: 100%;
+  color: white;
   display: flex;
   gap: 20px;
-  align-items: flex-end;
-  color: white;
+  padding: 50px;
+  width: 100%;
 }
 
 .album-name-text h3 {
@@ -36,10 +42,20 @@
 }
 
 .track {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
   border-top: 1px solid #e1e5eb;
   border-bottom: 1px solid #e1e5eb;
+  display: flex;
+  justify-content: space-between;
   padding: 10px 20px;
+}
+
+.track-name-favorite {
+  align-items: center;
+  display: flex;
+  gap: 25px;
+}
+
+.fa-solid.fa-heart {
+  color: rgb(206, 17, 17);
 }
