@@ -6,6 +6,7 @@ import getMusics from '../services/musicsAPI';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
+import MusicCard from '../components/MusicCard';
 
 class Album extends Component {
   constructor() {
@@ -67,29 +68,12 @@ class Album extends Component {
     return tracks.map((track) => {
       const isSongFavorite = this.checkIfSongIsFavorite(track);
       return (
-        <div key={ track.trackId } className="track">
-          <div className="track-name-favorite">
-            <p>{track.trackName}</p>
-            <div className="checkbox-container">
-              {isSongFavorite
-                ? <i className="fa-solid fa-heart" />
-                : <i className="fa-regular fa-heart" />}
-              <input
-                type="checkbox"
-                checked={ isSongFavorite }
-                data-testid={ `checkbox-music-${track.trackId}` }
-                onChange={ () => this.handleFavoriteTrack(track) }
-              />
-            </div>
-          </div>
-          <audio
-            data-testid="audio-component"
-            src={ track.previewUrl }
-            controls
-          >
-            <track kind="captions" />
-          </audio>
-        </div>
+        <MusicCard
+          key={ track.trackId }
+          track={ track }
+          isSongFavorite={ isSongFavorite }
+          callback={ this.handleFavoriteTrack }
+        />
       );
     });
   }

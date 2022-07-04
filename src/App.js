@@ -8,7 +8,6 @@ import Favorites from './pages/Favorites';
 import ProfileEdit from './pages/ProfileEdit';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
-import { getUser } from './services/userAPI';
 
 class App extends React.Component {
   constructor() {
@@ -20,10 +19,8 @@ class App extends React.Component {
     this.handleLogIn = this.handleLogIn.bind(this);
   }
 
-  async handleLogIn() {
-    const user = await getUser();
-    const isUserSet = Object.keys(user).length > 0;
-    if (isUserSet) this.setState({ loggedIn: true });
+  handleLogIn() {
+    this.setState({ loggedIn: true });
   }
 
   render() {

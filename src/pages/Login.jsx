@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { createUser } from '../services/userAPI';
+import { createUser, getUser } from '../services/userAPI';
 import Loading from '../components/Loading';
 
 class Login extends Component {
@@ -22,11 +22,11 @@ class Login extends Component {
 
   async handleUserCreation(event) {
     event.preventDefault();
-    this.setState({ isLoading: true });
     const { userName } = this.state;
     const { callback } = this.props;
+    this.setState({ isLoading: true });
     await createUser({ name: userName });
-    await callback();
+    callback();
   }
 
   isInputValid(userName) {
