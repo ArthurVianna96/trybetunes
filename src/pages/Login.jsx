@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import './Login.css';
+import Logo from '../assets/logo1.png';
 import { createUser } from '../services/userAPI';
 import Loading from '../components/Loading';
 
@@ -38,13 +40,14 @@ class Login extends Component {
     const { userName, isLoading } = this.state;
     const isLoginButtonDisabled = this.isInputValid(userName);
     return (
-      <div data-testid="page-login">
+      <div className="login-page" data-testid="page-login">
         {!isLoading ? (
-          <>
-            <p>TrybeTunes</p>
+          <section className="section__login">
+            <img src={ Logo } alt="trybe tunes" />
             <form className="app-form" onSubmit={ this.handleUserCreation }>
               <input
                 type="text"
+                placeholder="Nome"
                 data-testid="login-name-input"
                 value={ userName }
                 onChange={ this.handleInputChange }
@@ -58,7 +61,7 @@ class Login extends Component {
                 Entrar
               </button>
             </form>
-          </>
+          </section>
         ) : <Loading />}
       </div>
     );
