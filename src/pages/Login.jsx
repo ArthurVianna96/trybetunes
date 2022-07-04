@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { createUser, getUser } from '../services/userAPI';
+import { createUser } from '../services/userAPI';
 import Loading from '../components/Loading';
 
 class Login extends Component {
