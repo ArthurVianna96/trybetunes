@@ -73,7 +73,10 @@ class Search extends Component {
           : (
             albums && (
               <section className="section__albums">
-                <h2>{`Resultado de álbuns de: ${previousSearch}`}</h2>
+                <h2>
+                  Resultado de álbuns de:
+                  <span className="search-param"> {previousSearch}</span>
+                </h2>
                 <div className="container__albums">
                   {message && <p>{message}</p>}
                   {albums.map((album) => (

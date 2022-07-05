@@ -23,6 +23,7 @@
 }
 
 .checkbox-container input {
+  appearance: none;
   cursor: pointer;
   left: 1px;
   position: absolute;
