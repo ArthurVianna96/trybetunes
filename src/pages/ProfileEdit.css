@@ -1,0 +1,94 @@
+.profile-edit-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.section__profile-edit {
+  align-items: flex-start;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  padding: 80px;
+}
+
+.profile-edit-fields {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+  padding: 20px;
+  width: 330px;
+}
+
+.profile-edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.profile-edit-page input, .profile-edit-field textarea {
+  border: none;
+  border-bottom: 1px solid #3d495c;
+  font-family: Verdana , Geneva , Tahoma , sans-serif;
+  min-height: 30px;
+  outline: none;
+  padding: 0 8px;
+  transition: all 300ms ease;
+  width: 100%;
+}
+
+.profile-edit-field textarea {
+  padding: 5px 8px;
+}
+
+.profile-edit-page input:focus, .profile-edit-field textarea:focus {
+  background-color: #f0f2f5;
+}
+
+.profile-edit-field p {
+  color: #3d495c;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.avatar-field {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.avatar-field .fa-solid.fa-circle-user {
+  color: #3d495c;
+  font-size: 4rem;
+}
+
+.avatar-field img {
+  border-radius: 50%;
+  height: 4rem;
+  width: 4rem;
+}
+
+.profile-edit-page button {
+  background-color: #003be5;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  height: 35px;
+  transition: all 300ms ease;
+  width: 120px;
+}
+
+.profile-edit-page button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.profile-edit-page button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
