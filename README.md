@@ -1,3 +1,6 @@
+# O que é o TrybeTunes
+O trybe tunes é um dos projetos do curso de desenvolvimento web da trybe. Seu objetivo era de estudar e aplicar os conceitos de ciclo de vida do react e requisições a API's, neste caso, a API do itunes
+
 # 🚧 README em construção 🚧
 <!-- Olá, Tryber!
 Esse é apenas um arquivo inicial para o README do seu projeto.
