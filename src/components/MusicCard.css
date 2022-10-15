@@ -18,6 +18,15 @@
   position: relative;
 }
 
+.checkbox-container button {
+  background-color: transparent;
+  border: none;
+}
+
+.checkbox-container button:hover {
+  cursor: pointer
+}
+
 .checkbox-container label {
   color: transparent;
 }

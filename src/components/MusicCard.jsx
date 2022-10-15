@@ -22,8 +22,8 @@ class MusicCard extends Component {
           </div>
           <div className="checkbox-container">
             {isSongFavorite
-              ? <i className="fa-solid fa-heart" />
-              : <i className="fa-regular fa-heart" />}
+              ? <button onClick={() => callback(track)}><i className="fa-solid fa-heart" /></button>
+              : <button onClick={() => callback(track)}><i className="fa-regular fa-heart" /></button>}
             <label htmlFor={ trackId }>
               Favorita
               <input
